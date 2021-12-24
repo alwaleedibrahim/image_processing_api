@@ -7,7 +7,10 @@
     "build": "npx tsc",
     "start": "node build/index.js",
     "jasmine": "jasmine",
-    "test": "npm run build && npm run jasmine"
+    "test": "npm run build && npm run jasmine",
+    "lint": "eslint .", 
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write src/**/*.ts"
   },
   "repository": {
     "type": "git",
