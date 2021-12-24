@@ -59,3 +59,5 @@ app.get("/api", async (req: Request, res: Response) => {
     res.status(200).sendFile(resizedImage, { root: "." });
   }
 });
+
+export default app;
