@@ -4,13 +4,13 @@ import sharp from "sharp";
 // Import fs for file handling
 import { promises as fsPromises } from "fs";
 
-const resizeImage = async function(imageName: string, imageHeight: number, imageWidth: number) {
+const resizeImage = async (imageName: string, imageHeight: number, imageWidth: number) :Promise<string> => {
 
-    const imagePath = `assets/images/${imageName}.jpg`;
+    const imagePath: string = `assets/images/${imageName}.jpg`;
     
     // Check if imageName matches an existing image in assets/images directory
     try {
-        const imageExists = (await fsPromises.stat(imagePath)).isFile();
+        const imageExists: boolean = (await fsPromises.stat(imagePath)).isFile();
         if (! imageExists) {
             return "Error"
         }
@@ -26,7 +26,7 @@ const resizeImage = async function(imageName: string, imageHeight: number, image
 
 
     // Set the path where the resized image will be stored (or where it is stored already)
-    const resizedImagePath = `assets/resized/${imageName}_${imageHeight}_${imageWidth}.jpg`;
+    const resizedImagePath: string = `assets/resized/${imageName}_${imageHeight}_${imageWidth}.jpg`;
 
 
  // Try to access the resized image
