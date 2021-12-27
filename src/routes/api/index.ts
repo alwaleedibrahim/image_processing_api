@@ -1,6 +1,6 @@
 import express, { Router, Request, Response } from 'express'
 
-import resizeImage from '../../models/image_resizer'
+import resizeImage from '../../modules/image_resizer'
 const api: Router = express.Router()
 
 api.get('/', async (req: Request, res: Response): Promise<void> => {
