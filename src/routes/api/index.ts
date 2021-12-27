@@ -16,7 +16,7 @@ api.get("/", async (req: Request, res: Response) => {
     res.status(200).sendFile(resized, { root: "." }); 
 }
  else {
-    res.status(500).send("Couldn't resize image");
+    res.status(404).send("Couldn't resize image");
  }
 
 });
