@@ -5,10 +5,29 @@ import sharp from "sharp";
 import { promises as fsPromises } from "fs";
 
 const resizeImage = async function(imageName: string, imageHeight: number, imageWidth: number) {
- // Set the path where the resized image will be stored (or where it is stored already)
- const imageURL = `assets/images/${imageName}.jpg`;
 
- const resizedImagePath = `assets/resized/${imageName}_${imageHeight}_${imageWidth}.jpg`;
+    const imagePath = `assets/images/${imageName}.jpg`;
+    
+    // Check if imageName matches an existing image in assets/images directory
+    try {
+        const imageExists = (await fsPromises.stat(imagePath)).isFile();
+        if (! imageExists) {
+            return "Error"
+        }
+    }
+    catch (err) {
+        return "Error"
+    }
+
+
+    if (isNaN(imageHeight) || isNaN(imageWidth)) {
+        return "Error";
+    }
+
+
+    // Set the path where the resized image will be stored (or where it is stored already)
+    const resizedImagePath = `assets/resized/${imageName}_${imageHeight}_${imageWidth}.jpg`;
+
 
  // Try to access the resized image
  // (in case it was resized previously)
@@ -18,7 +37,7 @@ const resizeImage = async function(imageName: string, imageHeight: number, image
    // Throwing an error means that image doesn't exist
    try {
      // Use sharp to resize the image
-     await sharp(imageURL)
+     await sharp(imagePath)
        .resize(imageHeight, imageWidth)
        .toFile(resizedImagePath);
    } catch (Err) {
